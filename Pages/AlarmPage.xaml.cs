@@ -8,7 +8,12 @@ namespace Time_Moment_Clock_GMTPC.Pages
         public AlarmPage()
         {
             InitializeComponent();
-            BindingContext = MauiProgram.Services.GetRequiredService<AlarmViewModel>();
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            BindingContext ??= MauiProgram.Services.GetRequiredService<AlarmViewModel>();
         }
     }
 }

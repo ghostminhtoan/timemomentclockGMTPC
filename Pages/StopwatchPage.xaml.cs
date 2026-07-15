@@ -8,7 +8,12 @@ namespace Time_Moment_Clock_GMTPC.Pages
         public StopwatchPage()
         {
             InitializeComponent();
-            BindingContext = MauiProgram.Services.GetRequiredService<StopwatchViewModel>();
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            BindingContext ??= MauiProgram.Services.GetRequiredService<StopwatchViewModel>();
         }
     }
 }

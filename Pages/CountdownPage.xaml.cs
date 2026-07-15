@@ -8,7 +8,12 @@ namespace Time_Moment_Clock_GMTPC.Pages
         public CountdownPage()
         {
             InitializeComponent();
-            BindingContext = MauiProgram.Services.GetRequiredService<CountdownViewModel>();
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            BindingContext ??= MauiProgram.Services.GetRequiredService<CountdownViewModel>();
         }
     }
 }

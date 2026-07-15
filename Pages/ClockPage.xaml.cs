@@ -8,7 +8,12 @@ namespace Time_Moment_Clock_GMTPC.Pages
         public ClockPage()
         {
             InitializeComponent();
-            BindingContext = MauiProgram.Services.GetRequiredService<ClockViewModel>();
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            BindingContext ??= MauiProgram.Services.GetRequiredService<ClockViewModel>();
         }
     }
 }
