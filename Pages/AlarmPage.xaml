@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Time_Moment_Clock_GMTPC.Pages.AlarmPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:models="clr-namespace:Time_Moment_Clock_GMTPC.Models"
+    x:Name="AlarmRoot"
+    Title="Alarm">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20,20,20,32" Spacing="18">
+            <Border Padding="20">
+                <VerticalStackLayout Spacing="14">
+                    <Label Text="Tao bao thuc moi" Style="{StaticResource SectionTitleLabel}" />
+                    <TimePicker Time="{Binding DraftAlarmTime}" />
+                    <Entry Text="{Binding DraftLabel}" Placeholder="Nhan bao thuc" />
+                    <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
+                        <Button Text="Them bao thuc" Command="{Binding AddAlarmCommand}" />
+                        <Button Grid.Column="1" Text="{Binding FloatingActionText}" Command="{Binding ToggleFloatingModeCommand}" />
+                    </Grid>
+                    <Button
+                        IsVisible="{Binding SupportsBackgroundScheduling}"
+                        Text="Cap quyen notification / exact alarm"
+                        Command="{Binding PrepareAlarmPermissionsCommand}" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Border Padding="20">
+                <VerticalStackLayout Spacing="12">
+                    <Label Text="Bao thuc da luu" Style="{StaticResource SectionTitleLabel}" />
+                    <CollectionView ItemsSource="{Binding Alarms}" HeightRequest="360" EmptyView="Chua co bao thuc nao.">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="models:AlarmItem">
+                                <Border Padding="16" Margin="0,0,0,10">
+                                    <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto" ColumnSpacing="12" RowSpacing="6">
+                                        <VerticalStackLayout>
+                                            <Label Text="{Binding DisplayTime}" FontSize="26" FontAttributes="Bold" />
+                                            <Label Text="{Binding Label}" />
+                                            <Label Text="{Binding StatusText}" Style="{StaticResource MutedLabel}" />
+                                        </VerticalStackLayout>
+                                        <Switch Grid.Column="1" IsToggled="{Binding IsEnabled}" />
+                                        <Button
+                                            Grid.Row="1"
+                                            Grid.Column="1"
+                                            Text="Xoa"
+                                            BackgroundColor="{StaticResource Danger}"
+                                            Command="{Binding Source={x:Reference AlarmRoot}, Path=BindingContext.DeleteAlarmCommand}"
+                                            CommandParameter="{Binding .}" />
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+            </Border>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

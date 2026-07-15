@@ -1,0 +1,9 @@
+bin/
+obj/
+.vs/
+*.user
+*.suo
+*.cache
+*.tmp
+*.log
+_swapper_accounts_tmp.txt

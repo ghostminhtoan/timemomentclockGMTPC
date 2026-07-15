@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Time_Moment_Clock_GMTPC.Pages.ClockPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Clock">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20,20,20,32" Spacing="18">
+            <Border Padding="24">
+                <VerticalStackLayout Spacing="12">
+                    <Label Text="Multi-function Clock" Style="{StaticResource MutedLabel}" />
+                    <Label Text="{Binding CurrentTime}" Style="{StaticResource HeroTitleLabel}" />
+                    <Label Text="{Binding CurrentDate}" Style="{StaticResource SectionTitleLabel}" />
+                    <Label Text="{Binding TimezoneLabel}" Style="{StaticResource MutedLabel}" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Border Padding="20">
+                <VerticalStackLayout Spacing="16">
+                    <Label Text="Tuy chinh hien thi" Style="{StaticResource SectionTitleLabel}" />
+                    <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto" RowSpacing="14">
+                        <Label Grid.Row="0" Text="Dinh dang 24h" VerticalOptions="Center" />
+                        <Switch Grid.Row="0" Grid.Column="1" IsToggled="{Binding Is24HourFormat}" />
+                        <Label Grid.Row="1" Text="{Binding FloatingModeLabel}" VerticalOptions="Center" />
+                        <Button Grid.Row="1" Grid.Column="1" Text="{Binding FloatingActionText}" Command="{Binding ToggleFloatingModeCommand}" />
+                    </Grid>
+                    <Button
+                        IsVisible="{Binding SupportsOverlayPermission}"
+                        Text="Mo quyen Draw over other apps"
+                        Command="{Binding RequestOverlayPermissionCommand}" />
+                    <Label
+                        Text="Windows se ghim cua so len tren. Android vao Picture-in-Picture, co san nut mo quyen overlay de mo rong ve sau."
+                        Style="{StaticResource MutedLabel}" />
+                </VerticalStackLayout>
+            </Border>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

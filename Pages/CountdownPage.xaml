@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Time_Moment_Clock_GMTPC.Pages.CountdownPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Countdown">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20,20,20,32" Spacing="18">
+            <Border Padding="24">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="Countdown" Style="{StaticResource MutedLabel}" />
+                    <Label Text="{Binding RemainingText}" Style="{StaticResource HeroTitleLabel}" />
+                    <ProgressBar Progress="{Binding Progress}" HeightRequest="8" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Border Padding="20">
+                <VerticalStackLayout Spacing="16">
+                    <Label Text="Nhap thoi gian" Style="{StaticResource SectionTitleLabel}" />
+                    <Grid ColumnDefinitions="*,*,*" ColumnSpacing="12">
+                        <Entry Text="{Binding HoursText}" Placeholder="HH" Keyboard="Numeric" HorizontalTextAlignment="Center" />
+                        <Entry Grid.Column="1" Text="{Binding MinutesText}" Placeholder="MM" Keyboard="Numeric" HorizontalTextAlignment="Center" />
+                        <Entry Grid.Column="2" Text="{Binding SecondsText}" Placeholder="SS" Keyboard="Numeric" HorizontalTextAlignment="Center" />
+                    </Grid>
+                    <Grid ColumnDefinitions="*,*,*" ColumnSpacing="12">
+                        <Button Text="1 min" Command="{Binding QuickPresetCommand}" CommandParameter="1m" />
+                        <Button Grid.Column="1" Text="5 min" Command="{Binding QuickPresetCommand}" CommandParameter="5m" />
+                        <Button Grid.Column="2" Text="10 min" Command="{Binding QuickPresetCommand}" CommandParameter="10m" />
+                    </Grid>
+                    <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto" ColumnSpacing="12" RowSpacing="12">
+                        <Button Grid.Row="0" Text="{Binding StartPauseText}" Command="{Binding StartPauseCommand}" />
+                        <Button Grid.Row="0" Grid.Column="1" Text="Reset" Command="{Binding ResetCommand}" />
+                        <Button Grid.Row="1" Text="{Binding FloatingActionText}" Command="{Binding ToggleFloatingModeCommand}" />
+                        <Button
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            Text="Quyen overlay"
+                            IsVisible="{Binding SupportsOverlayPermission}"
+                            Command="{Binding RequestOverlayPermissionCommand}" />
+                    </Grid>
+                </VerticalStackLayout>
+            </Border>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
