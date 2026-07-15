@@ -1,6 +1,5 @@
 using Android.App;
 using Android.Content.PM;
-using Android.OS;
 
 namespace Time_Moment_Clock_GMTPC
 {
@@ -13,14 +12,5 @@ namespace Time_Moment_Clock_GMTPC
         ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation | ConfigChanges.UiMode | ConfigChanges.ScreenLayout | ConfigChanges.SmallestScreenSize | ConfigChanges.Density)]
     public class MainActivity : MauiAppCompatActivity
     {
-        protected override void OnUserLeaveHint()
-        {
-            base.OnUserLeaveHint();
-
-            if (OperatingSystem.IsAndroidVersionAtLeast(26) && !IsInPictureInPictureMode)
-            {
-                EnterPictureInPictureMode(new PictureInPictureParams.Builder().Build()!);
-            }
-        }
     }
 }
