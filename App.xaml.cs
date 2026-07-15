@@ -6,15 +6,32 @@ namespace Time_Moment_Clock_GMTPC
 {
     public partial class App : Application
     {
+        private Exception? _startupException;
+
         public App()
         {
-            InitializeComponent();
+            try
+            {
+                InitializeComponent();
+                Resources ??= new ResourceDictionary();
+                Resources.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("Resources/Styles/Colors.xaml", UriKind.Relative) });
+                Resources.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("Resources/Styles/Styles.xaml", UriKind.Relative) });
+            }
+            catch (Exception ex)
+            {
+                _startupException = ex;
+            }
         }
 
         protected override Window CreateWindow(IActivationState? activationState)
         {
             try
             {
+                if (_startupException != null)
+                {
+                    throw _startupException;
+                }
+
                 return new Window(MauiProgram.Services.GetRequiredService<AppShell>());
             }
             catch (Exception ex)
